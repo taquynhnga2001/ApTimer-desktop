@@ -1,0 +1,4 @@
+BC_left	F_left	BC_right	F_right
+1	0	1	0
+1	0	1	0
+1	0	1	0

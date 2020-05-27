@@ -1121,8 +1121,6 @@ button below.'
                 min_rms = rms
                 best_j = j
 
-            print("* ", j, "\t rms: ", rms)
-            print("* ", j, "\t min_rms: ", min_rms)
             print("* ", j, "\t best_j: ", best_j)
             print()
 
@@ -1164,29 +1162,29 @@ button below.'
         print("Discrepancy: ", Discrepancy)
 
         if self.num_run > 1:
-            self.fig.update_traces(go.Scatter(x=xcp, y=min_Ans), selector=dict(name='Min'))
-            self.fig.update_traces(go.Scatter(x=xcp, y=max_Ans), selector=dict(name='Max'))
+            self.fig.update_traces(go.Scatter(x=xcp-dx/2, y=min_Ans), selector=dict(name='Min'))
+            self.fig.update_traces(go.Scatter(x=xcp-dx/2, y=max_Ans), selector=dict(name='Max'))
         else:
-            self.fig.add_trace(go.Scatter(x=xcp,
+            self.fig.add_trace(go.Scatter(x=xcp-dx/2,
                                           y=min_Ans,
                                           mode="lines",
                                           name='Min',
                                           line=dict(color='green', dash='dash', width=1)),
                                row=1, col=1)
-            self.fig.add_trace(go.Scatter(x=xcp,
+            self.fig.add_trace(go.Scatter(x=xcp-dx/2,
                                           y=max_Ans,
                                           mode="lines",
                                           name='Max',
                                           line=dict(color='green', dash='dash', width=1)),
                                row=1, col=1)
-        self.fig.update_traces(go.Scatter(x=xcp, y=best_Ans), selector=dict(name='Model 1'))
-        self.fig.update_traces(go.Scatter(x=xcp, y=Ans_F[:, best_j]), selector=dict(name='Model 2'))
-        self.fig.update_traces(go.Scatter(x=xcp, y=Ans_OH[:, best_j]), selector=dict(name='Model 3'))
+        self.fig.update_traces(go.Scatter(x=xcp-dx/2, y=best_Ans), selector=dict(name='Model 1'))
+        self.fig.update_traces(go.Scatter(x=xcp-dx/2, y=Ans_F[:, best_j]), selector=dict(name='Model 2'))
+        self.fig.update_traces(go.Scatter(x=xcp-dx/2, y=Ans_OH[:, best_j]), selector=dict(name='Model 3'))
 
         self.fig.write_image("images/Model.png")
         self.figure_pic2.SetBitmap(wx.Bitmap('images/Model.png'))
         self.bestfittime_output.SetValue(str(round(t_best_hour, 5)))
-        self.day_output.SetValue(str(round(t_best_day, 5)))
+        self.day_output.SetValue(str(round(t_best_day, 1)))
         self.plus_output.SetValue(str(round(t_best_pers, 5)))
         self.minus_output.SetValue(str(abs(round(t_best_ners, 5))))
 
